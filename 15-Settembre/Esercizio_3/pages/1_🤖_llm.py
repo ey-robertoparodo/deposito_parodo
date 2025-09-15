@@ -1,10 +1,22 @@
 import streamlit as st
 from openai import AzureOpenAI
 from dotenv import load_dotenv
+from tenacity import retry, stop_after_attempt, wait_fixed
 import os
 
 load_dotenv()
 
+@retry(stop=stop_after_attempt(3), wait=wait_fixed(2), before=lambda r: print(f"Tentativo {r.attempt_number}"))
+def model_response():
+    stream = client.chat.completions.create(
+        model=st.session_state["openai_model"],
+        messages=[
+            {"role": m["role"], "content": m["content"]}
+            for m in st.session_state.messages
+        ],
+        stream=True,
+    )
+    return stream
 
 if "endpoint" in st.session_state and "deployment" in st.session_state and "api_version" in st.session_state and "api_key":
     try:
@@ -45,15 +57,7 @@ if "endpoint" in st.session_state and "deployment" in st.session_state and "api_
                 st.markdown(prompt)
 
             with st.chat_message("assistant"):
-                stream = client.chat.completions.create(
-                    model=st.session_state["openai_model"],
-                    messages=[
-                        {"role": m["role"], "content": m["content"]}
-                        for m in st.session_state.messages
-                    ],
-                    stream=True,
-                )
-                response = st.write_stream(stream)
+                response = st.write_stream(model_response())
             st.session_state.messages.append({"role": "assistant", "content": response})
     except:
         st.error("Autenticazione non riuscita")
