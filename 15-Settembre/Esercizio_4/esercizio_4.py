@@ -4,11 +4,10 @@ import os
 
 load_dotenv()
 
-# Configurazione client Azure
 client = AzureOpenAI(
     azure_endpoint=os.getenv("ENDPOINT"),
     api_key=os.getenv("OPEN_API_KEY"),
-    api_version="2023-05-15"
+    api_version=os.getenv("API_VERSION_EMBED")
 )
 
 response = client.embeddings.create(
