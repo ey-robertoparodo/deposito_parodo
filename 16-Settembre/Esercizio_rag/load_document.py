@@ -9,7 +9,6 @@ class DocumentLoader:
     def __init__(self, directory: str):
         self.directory = directory
 
-
     def load_pdfs_from_folder(self) -> List[Document]:
         pdf_documents = []
         for filename in os.listdir(self.directory):
@@ -20,11 +19,13 @@ class DocumentLoader:
                     text = ""
                     for page in reader.pages:
                         text += page.extract_text() or ""
-                    pdf_documents.append(Document(page_content=text, metadata={"source": filename}))
+                    pdf_documents.append(
+                        Document(page_content=text, metadata={"source": filename})
+                    )
                 except Exception as e:
                     print(f"Errore nella lettura di {filename}: {e}")
         return pdf_documents
-    
+
 
 if __name__ == "__main__":
     doc = DocumentLoader("16-Settembre/Esercizio_rag/docs")

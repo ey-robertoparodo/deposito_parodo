@@ -31,6 +31,7 @@ from load_document import DocumentLoader
 
 load_dotenv()
 
+
 @dataclass
 class Settings:
     # Persistenza FAISS
@@ -39,14 +40,16 @@ class Settings:
     chunk_size: int = 2000
     chunk_overlap: int = 400
     # Retriever (MMR)
-    search_type: str = "mmr"        # "mmr" o "similarity"
-    k: int = 4                      # risultati finali
-    fetch_k: int = 20               # candidati iniziali (per MMR)
-    mmr_lambda: float = 0.3         # 0 = diversificazione massima, 1 = pertinenza massima
+    search_type: str = "mmr"  # "mmr" o "similarity"
+    k: int = 4  # risultati finali
+    fetch_k: int = 20  # candidati iniziali (per MMR)
+    mmr_lambda: float = 0.3  # 0 = diversificazione massima, 1 = pertinenza massima
     # Embedding
     hf_model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
     # LM Studio (OpenAI-compatible)
-    lmstudio_model_env: str = "LMSTUDIO_MODEL"  # nome del modello in LM Studio, via env var
+    lmstudio_model_env: str = (
+        "LMSTUDIO_MODEL"  # nome del modello in LM Studio, via env var
+    )
 
 
 SETTINGS = Settings()
@@ -55,20 +58,23 @@ SETTINGS = Settings()
 # Componenti di base
 # =========================
 
+
 def get_embeddings(settings: Settings) -> AzureOpenAIEmbeddings:
     return AzureOpenAIEmbeddings(
         azure_endpoint=os.getenv("ENDPOINT"),
         api_key=os.getenv("OPEN_API_KEY"),
-        api_version=os.getenv("API_VERSION_EMBED")
+        api_version=os.getenv("API_VERSION_EMBED"),
     )
+
 
 def get_llm_from_lmstudio(settings: Settings):
     return AzureChatOpenAI(
         deployment_name="gpt-4o",
         api_version=os.getenv("API_VERSION"),
         azure_endpoint=os.getenv("ENDPOINT"),
-        api_key=os.getenv("OPEN_API_KEY")
+        api_key=os.getenv("OPEN_API_KEY"),
     )
+
 
 def split_documents(docs: List[Document], settings: Settings) -> List[Document]:
     """
@@ -78,38 +84,50 @@ def split_documents(docs: List[Document], settings: Settings) -> List[Document]:
         chunk_size=settings.chunk_size,
         chunk_overlap=settings.chunk_overlap,
         separators=[
-            "\n\n", "\n", ". ", "? ", "! ", "; ", ": ",
-            ", ", " ", ""  # fallback aggressivo
+            "\n\n",
+            "\n",
+            ". ",
+            "? ",
+            "! ",
+            "; ",
+            ": ",
+            ", ",
+            " ",
+            "",  # fallback aggressivo
         ],
     )
     return splitter.split_documents(docs)
 
 
-def build_faiss_vectorstore(chunks: List[Document], embeddings: HuggingFaceEmbeddings, persist_dir: str) -> FAISS:
+def build_faiss_vectorstore(
+    chunks: List[Document], embeddings: HuggingFaceEmbeddings, persist_dir: str
+) -> FAISS:
     """
     Costruisce da zero un FAISS index (IndexFlatL2) e lo salva su disco.
     """
     # Determina la dimensione dell'embedding
-    vs = FAISS.from_documents(
-        documents=chunks,
-        embedding=embeddings
-    )
+    vs = FAISS.from_documents(documents=chunks, embedding=embeddings)
 
     Path(persist_dir).mkdir(parents=True, exist_ok=True)
     vs.save_local(persist_dir)
     return vs
 
 
-def load_or_build_vectorstore(settings: Settings, embeddings: HuggingFaceEmbeddings, docs: List[Document]) -> FAISS:
+def load_or_build_vectorstore(
+    settings: Settings, embeddings: HuggingFaceEmbeddings, docs: List[Document]
+) -> FAISS:
     """
     Tenta il load di un indice FAISS persistente; se non esiste, lo costruisce e lo salva.
     """
     # Se l'indice FAISS esiste già, caricalo, altrimenti crealo
     import os
+
     faiss_index_path = os.path.join(settings.persist_dir, "index.faiss")
     if os.path.exists(faiss_index_path):
         print(f"Carico indice FAISS esistente da {settings.persist_dir}")
-        return FAISS.load_local(settings.persist_dir, embeddings, allow_dangerous_deserialization=True)
+        return FAISS.load_local(
+            settings.persist_dir, embeddings, allow_dangerous_deserialization=True
+        )
     else:
         print("Creo nuovo indice FAISS...")
         chunks = split_documents(docs, settings)
@@ -123,7 +141,11 @@ def make_retriever(vector_store: FAISS, settings: Settings):
     if settings.search_type == "mmr":
         return vector_store.as_retriever(
             search_type="mmr",
-            search_kwargs={"k": settings.k, "fetch_k": settings.fetch_k, "lambda_mult": settings.mmr_lambda},
+            search_kwargs={
+                "k": settings.k,
+                "fetch_k": settings.fetch_k,
+                "lambda_mult": settings.mmr_lambda,
+            },
         )
     else:
         return vector_store.as_retriever(
@@ -155,16 +177,20 @@ def build_rag_chain(llm, retriever):
         "Sii conciso, accurato e tecnicamente corretto."
     )
 
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", system_prompt),
-        ("human",
-         "Domanda:\n{question}\n\n"
-         "Contesto (estratti selezionati):\n{context}\n\n"
-         "Istruzioni:\n"
-         "1) Rispondi solo con informazioni contenute nel contesto.\n"
-         "2) Cita sempre le fonti pertinenti nel formato [source:FILE].\n"
-         "3) Se la risposta non è nel contesto, scrivi: 'Non è presente nel contesto fornito.'")
-    ])
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", system_prompt),
+            (
+                "human",
+                "Domanda:\n{question}\n\n"
+                "Contesto (estratti selezionati):\n{context}\n\n"
+                "Istruzioni:\n"
+                "1) Rispondi solo con informazioni contenute nel contesto.\n"
+                "2) Cita sempre le fonti pertinenti nel formato [source:FILE].\n"
+                "3) Se la risposta non è nel contesto, scrivi: 'Non è presente nel contesto fornito.'",
+            ),
+        ]
+    )
 
     # LCEL: dict -> prompt -> llm -> parser
     chain = (
@@ -190,6 +216,7 @@ def rag_answer(question: str, chain) -> str:
 # Esecuzione dimostrativa
 # =========================
 
+
 def main():
     settings = SETTINGS
 
@@ -197,7 +224,6 @@ def main():
     embeddings = get_embeddings(settings)
     llm = get_llm_from_lmstudio(settings)
 
-    
     # 2) Dati simulati e indicizzazione (load or build)
     doc = DocumentLoader("16-Settembre/Esercizio_rag/docs")
     docs = doc.load_pdfs_from_folder()
@@ -205,7 +231,6 @@ def main():
 
     # 3) Retriever ottimizzato
     retriever = make_retriever(vector_store, settings)
-
 
     # 4) Catena RAG
     chain = build_rag_chain(llm, retriever)
@@ -216,7 +241,7 @@ def main():
         "Chi è Cristiano Ronaldo",
         "Qual è la captale della Francia",
         "che esami devo aver superato per poter iniziare il tirocinio",
-        "La capitale della Francia è Berlino"
+        "La capitale della Francia è Berlino",
     ]
 
     for q in questions:
@@ -226,6 +251,7 @@ def main():
         ans = rag_answer(q, chain)
         print(ans)
         print()
+
 
 if __name__ == "__main__":
     main()
