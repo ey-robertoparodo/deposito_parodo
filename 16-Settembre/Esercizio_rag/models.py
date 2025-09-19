@@ -12,7 +12,7 @@ def get_embeddings() -> AzureOpenAIEmbeddings:
     )
 
 
-def get_llm_from_lmstudio():
+def get_llm():
     return AzureChatOpenAI(
         deployment_name="gpt-4o",
         api_version=os.getenv("API_VERSION"),
