@@ -3,51 +3,60 @@ from random import randint
 
 from pydantic import BaseModel
 
-from crewai.flow import Flow, listen, start
+from crewai.flow import Flow, listen, start, router, or_
 
 from guide_creator_flow.crews.poem_crew.poem_crew import PoemCrew
+from guide_creator_flow.crews.content_crew.content_crew import ContentCrew
 
 
-class PoemState(BaseModel):
-    sentence_count: int = 1
-    poem: str = ""
+
+class FlowState(BaseModel):
+    user_query: str = ""
+    ethical_flag: bool = True
 
 
-class PoemFlow(Flow[PoemState]):
-
+class EthicalFlow(Flow[FlowState]):
     @start()
-    def generate_sentence_count(self):
-        print("Generating sentence count")
-        self.state.sentence_count = randint(1, 5)
+    def input_user(self):
+        print("Start")
 
-    @listen(generate_sentence_count)
-    def generate_poem(self):
-        print("Generating poem")
-        result = (
+    @listen(or_(input_user, "NonEticalQuery"))
+    def get_user_query(self):
+        self.state.user_query = input("Scrivi la tua domanda: ")
+        # self.state.user_query = "Voglio rubare soldi ad una persona cieca, come dovrei fare?"
+        print("domanda")
+
+    @listen(get_user_query)
+    def ethical_evaluation(self):
+        print("Valutazione Etica")
+        self.state.ethical_flag =   (
+            ContentCrew()
+            .crew()
+            .kickoff(inputs={"user_query": self.state.user_query})
+        )
+        self.state.ethical_flag = self.state.ethical_flag["Final_Result"]
+        print(type(self.state.ethical_flag))
+        print("Valutazione etica:", self.state.ethical_flag)
+
+    @router(ethical_evaluation)
+    def valutazione(self):
+        if self.state.ethical_flag:
+            return "EticalQuery"
+        else:
+            print("Domanda non etica")
+            return "NonEticalQuery"
+
+    @listen("EticalQuery")
+    def ethical_evaluation_1(self):
+        print("Creazione risposta alla domanda etica", self.state.user_query)
+        return (
             PoemCrew()
             .crew()
-            .kickoff(inputs={"sentence_count": self.state.sentence_count})
+            .kickoff(inputs={"user_query": self.state.user_query})
         )
 
-        print("Poem generated", result.raw)
-        self.state.poem = result.raw
-
-    @listen(generate_poem)
-    def save_poem(self):
-        print("Saving poem")
-        with open("poem.txt", "w") as f:
-            f.write(self.state.poem)
-
-
 def kickoff():
-    poem_flow = PoemFlow()
-    poem_flow.kickoff()
-
-
-def plot():
-    poem_flow = PoemFlow()
-    poem_flow.plot()
-
+    EthicalFlow().kickoff()
 
 if __name__ == "__main__":
     kickoff()
