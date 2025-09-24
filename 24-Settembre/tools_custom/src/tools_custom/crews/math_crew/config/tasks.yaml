@@ -1,0 +1,7 @@
+calculator:
+  description: >
+    Solve the given mathematical {problem} or expression and provide the final answer 
+    as a number.
+  expected_output: >
+    A single number representing the result of the calculation.
+  agent: math_professor
