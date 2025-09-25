@@ -1,119 +1,84 @@
-# Come Ottenere la Lode Durante il Percorso di Laurea
+# Procedura per Iniziare il Tirocinio Curriculare
 
 ## Overview
-L'ottenimento della lode (110 e lode) durante il percorso di laurea in Italia è un riconoscimento accademico che richiede il raggiungimento di standard elevati in termini di rendimento accademico, rispetto dei tempi di percorso e qualità della tesi di laurea. Questo risultato non solo riflette il massimo livello di eccellenza nello studio, ma può anche avere implicazioni positive per il proseguimento della carriera accademica o professionale.
-
-Questo documento fornisce una guida pratica e ben organizzata per gli studenti universitari interessati a ottenere la lode. Saranno esaminati i criteri principali, strategie pratiche, errori comuni, e risposte alle domande frequenti per aiutarti a raggiungere questo obiettivo.
-
----
+Questa guida presenta i passi necessari per iniziare un tirocinio curriculare universitario. La procedura è strutturata in conformità ai regolamenti accademici e prevede l'utilizzo di strumenti specifici, come l'applicativo Cineca TSP, per l'attivazione e la gestione del tirocinio. Per informazioni complete e aggiornate, è necessario fare riferimento al portale ufficiale "unica.it - Tirocini".
 
 ## Core Concepts
-### Requisiti Principali per la Lode
-Per ottenere la lode al momento della laurea, è necessario:
-1. **Media ponderata alta**:
-   - La media dei voti degli esami deve essere vicina o pari al massimo (30/30).
-   - In genere, per puntare alla lode, la media ponderata deve essere almeno 28 o superiore.
-2. **Rispetto delle scadenze accademiche**:
-   - Laurearsi nei tempi previsti per il proprio corso di studio (3 anni per una laurea triennale, 2 anni per una laurea magistrale).
-   - Spesso, il rispetto delle tempistiche accademiche può garantire punti aggiuntivi.
-3. **Tesi eccellente**:
-   - Presentare una tesi di laurea di alta qualità, ben strutturata e basata su una solida ricerca accademica.
-   - La discussione della tesi deve essere convincente e dimostrare padronanza dell'argomento.
+### Cos'è un Tirocinio Curriculare?
+- Il tirocinio curriculare è un'attività formativa obbligatoria prevista dal piano di studi, che consente agli studenti di acquisire esperienza pratica in un contesto lavorativo.
+- Ogni Credito Formativo Universitario (CFU) previsto corrisponde a **25 ore di attività di tirocinio**.
 
-### Il Ruolo della Commissione di Laurea
-La commissione di laurea, composta solitamente da professori e membri del tuo dipartimento, ha l'autorità di aggiungere punti al voto finale e di assegnare la lode. La loro decisione si basa su:
-- La tua performance accademica complessiva.
-- La qualità della tua tesi e della discussione.
-- Eventuali attività extracurriculari accademiche rilevanti.
-
----
-
+### Strumento di Gestione: Cineca TSP
+- Cineca TSP è la piattaforma designata per:
+  - L'attivazione del tirocinio.
+  - La gestione delle attività.
+  - Il monitoraggio dei progressi.
+  
 ## How It Works
-### Procedura Dettagliata per Ottenere la Lode
-1. **Pianifica il tuo percorso di studio**:
-   - Scopri quali sono i criteri specifici per il tuo corso di laurea (consulta il regolamento del tuo ateneo).
-   - Stabilisci obiettivi di rendimento per ogni anno accademico.
-2. **Massimizza i voti agli esami**:
-   - Mira a ottenere il massimo (30/30) in tutti gli esami principali.
-   - Concentrati sugli esami con CFU elevati, poiché hanno un peso maggiore sulla media ponderata.
-3. **Sfrutta i punti bonus**:
-   - Laureati nei tempi previsti per ottenere punti extra.
-   - Verifica eventuali altre opportunità di accumulare punti bonus con tirocini o attività aggiuntive approvate.
-4. **Elabora una tesi eccellente**:
-   - Scegli un argomento che ti appassiona e che abbia rilevanza scientifica.
-   - Collabora strettamente con il tuo relatore per garantire una ricerca originale e di qualità.
-   - Esponi con chiarezza e sicurezza durante la discussione.
-5. **Sviluppa una relazione positiva con i professori**:
-   - La tua reputazione accademica può influenzare positivamente la commissione di laurea.
+### Passaggi per Avviare il Tirocinio
+1. **Consultare il Portale Ufficiale**
+   - Accedi al portale [unica.it - Tirocini](http://www.unica.it/tirocini).
+   - Segui le istruzioni operative pubblicate sulla pagina ufficiale per avviare il processo.
 
----
+2. **Registrazione e Accesso alla Piattaforma Cineca TSP**
+   - Registrati o accedi alla piattaforma Cineca TSP utilizzando le credenziali universitarie.
+   - Completa la sezione relativa ai dettagli del tirocinio (es. sede, durata, ecc.).
+
+3. **Calcolo delle Ore di Attività**
+   - Determina il numero di ore richieste in base ai crediti (CFU) specificati nel proprio piano di studi.
+   - Esempio: Se il tirocinio è di 6 CFU, sono necessarie 150 ore di attività (6 CFU x 25 ore per CFU).
+
+4. **Monitoraggio e Completa Documentazione**
+   - Durante il tirocinio, utilizza Cineca TSP per monitorare le attività e caricare i documenti richiesti.
+
+5. **Consegna della Relazione Finale**
+   - Dopo aver completato il tirocinio, prepara e consegna la relazione finale, se richiesta, attraverso i canali indicati.
 
 ## Examples
-### Simulazione Voti e Calcolo della Media Ponderata
-Se hai quattro esami con i seguenti CFU e voti:
-- Esame 1: 9 CFU, Voto 30
-- Esame 2: 12 CFU, Voto 28
-- Esame 3: 6 CFU, Voto 30
-- Esame 4: 3 CFU, Voto 27  
-La media ponderata si calcola così:
-\[(9×30 + 12×28 + 6×30 + 3×27) ÷ (9+12+6+3) = 29,1\]
-In questo caso, la tua media ponderata (29,1) ti metterebbe in buona posizione per puntare alla lode.
+### Esempio di Calcolo delle Ore
+- **Scenario:** Tirocinio di 9 CFU.
+  - Totale ore richieste: \( 9 \times 25 = 225 \, \text{ore} \).
 
----
+### Link Utili
+- Portale tirocini: [unica.it - Tirocini](http://www.unica.it/tirocini).
 
 ## Best Practices
-### Strategie per il Successo
-- **Pianificazione**: Utilizza un calendario per organizzare lo studio e rispettare le scadenze.
-- **Preparazione agli esami**: Studia regolarmente e approfondisci argomenti chiave, evitando strategie dell'ultimo minuto.
-- **Coinvolgimento nella ricerca**: Partecipare a progetti di ricerca o pubblicare articoli accademici può migliorare significativamente il tuo profilo.
-- **Comunicazione efficace**: Coltiva un rapporto positivo e professionale con il tuo relatore e i membri del dipartimento.
-- **Gestione dello stress**: Mantieni un equilibrio tra studio e benessere per evitare il burnout.
-
----
+- **Pianifica in anticipo.** Verifica il numero di CFU e il relativo carico orario per non accumulare ritardi.
+- **Utilizza Cineca TSP.** Segui tutte le procedure esclusivamente tramite la piattaforma indicata, evitando l'uso di strumenti esterni non ufficiali.
+- **Controlla le scadenze.** Assicurati di rispettare i termini indicati dall'università per l'attivazione e la conclusione del tirocinio.
 
 ## Common Pitfalls
 ### Errori da Evitare
-1. **Tralasciare esami con pochi CFU**:
-   - Anche se meno "pesanti", abbassano la media.
-2. **Non rispettare i tempi**:
-   - Rimandare gli esami o la tesi aiuta raramente.
-3. **Negligenza nella tesi**:
-   - Non dedicare abbastanza tempo alla ricerca e alla revisione.
-4. **Mancanza di chiarezza**:
-   - Esporre in modo disorganizzato può compromettere il giudizio della commissione.
-
----
+1. **Non consultare il portale unico.**
+   - Il mancato accesso a "unica.it - Tirocini" può comportare una mancata comprensione delle procedure.
+2. **Non calcolare correttamente le ore per CFU.**
+   - Sottovalutare o sovrastimare il numero di ore richieste può portare a sanzioni accademiche o ritardi nella laurea.
+3. **Ignorare le comunicazioni ufficiali.**
+   - Non seguire le indicazioni fornite via email o sulla piattaforma Cineca TSP può rallentare il processo.
 
 ## FAQ
-### Q: Serve una media precisa per la lode?
-**A:** Non esiste una media specifica per ottenere la lode, ma in genere è necessario che la media sia intorno a 28 o superiore, insieme a una tesi eccellente.
+### Q: Quali documenti sono necessari per iniziare il tirocinio?
+A: I dettagli sui documenti richiesti devono essere consultati su "unica.it - Tirocini" e includono tipicamente un progetto formativo e accordi con l'organizzazione ospitante.
 
-### Q: Posso ottenere la lode se mi laureo in ritardo?
-**A:** Raramente, poiché molti regolamenti universitari offrono punti bonus solo a chi si laurea nei tempi previsti.
+### Q: Come si calcolano le ore di tirocinio?
+A: Le ore richieste sono determinate moltiplicando i CFU previsti per il tirocinio per 25. Ad esempio, per 6 CFU, il totale è di 150 ore.
 
-### Q: Come viene valutata la discussione della tesi?
-**A:** La commissione valuta la chiarezza, la competenza, e la capacità di rispondere alle domande, oltre al contenuto della tesi stessa.
-
----
+### Q: È possibile modificare i dettagli del tirocinio una volta avviato?
+A: Eventuali modifiche devono essere comunicate tempestivamente tramite Cineca TSP e approvate dall'università.
 
 ## Troubleshooting
-### Issue: Media inferiore a 28
-- **Cause**: Troppe valutazioni inferiori al 30.
-- **Resolution**: Pianifica un recupero strategico con esami opzionali o cerca di compensare con una tesi eccellente.
+- **Issue:** Non riesco ad accedere alla piattaforma Cineca TSP.  
+  **Cause:** Credenziali errate o account non ancora attivato.  
+  **Resolution:** Verifica le credenziali universitarie con l'assistenza tecnica o il supporto studenti.
 
-### Issue: Ritardo nella laurea
-- **Cause**: Mancanza di pianificazione o difficoltà personali.
-- **Resolution**: Identifica le cause del ritardo e riduci eventuali blocchi.
-
----
+- **Issue:** Le ore di tirocinio calcolate non corrispondono a quelle indicate.  
+  **Cause:** Errore nel conteggio dei CFU o nelle indicazioni fornite.  
+  **Resolution:** Consulta il piano di studi e il regolamento del tirocinio per verificare le ore corrette.
 
 ## References
-- **Doc_001**: Regolamenti universitari generali per l’assegnazione della lode.
-- **Doc_002**: Linee guida sulla valutazione della media ponderata e della tesi di laurea.
-- **Doc_003**: Indicazioni pratiche per la stesura di una tesi eccellente.
-
----
+- **DSBAI_REG_DID_AA_2526.pdf**: Indicazioni operative per l'attivazione e la gestione dei tirocini curriculari.
+- **unica.it - Tirocini**: Sito ufficiale per istruzioni ed avvio del tirocinio.
 
 (Optional) ## Knowledge Gaps / Further Research
-- Indagini su come variano i criteri per la lode tra diversi atenei in Italia.
-- Ulteriori esempi pratici per il calcolo della media ponderata.
+- Dettagli specifici sui tipi di tirocini (aziendali, accademici, ecc.) non sono disponibili nei documenti forniti.
+- Informazioni sui requisiti aggiuntivi, come l'approvazione del progetto formativo, potrebbero essere utili da chiarire.

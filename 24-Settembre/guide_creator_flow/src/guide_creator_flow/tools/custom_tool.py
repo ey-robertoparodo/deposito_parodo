@@ -18,5 +18,5 @@ def RAGSearch(query: str) -> str:
     - List[Document]: A list of the top 5 documents most similar to the query
     """
     retriever = initialize_vectorstore()
-    results = retriever.get_relevant_documents(query)
+    results = retriever.invoke(query)
     return results
