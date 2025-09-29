@@ -9,9 +9,6 @@ from guide_creator_flow.crews.poem_crew.poem_crew import PoemCrew
 from guide_creator_flow.crews.rag_crew.rag_crew import RagCrew
 from guide_creator_flow.crews.output_crew.output_crew import OutputCrew
 
-from utilis.ragas_prova import execute_ragas
-
-
 
 class CustomState(BaseModel):
     """Shared state for the flow orchestration.
@@ -27,7 +24,7 @@ class CustomState(BaseModel):
     documents : list
         Retrieved documents related to the user's query.
     """
-    topic: str = "Regolamenti universitari o fondi pensione/ viaggi in Francia"
+    topic: str = "Holidays/Trips/Travel/Tourism"
     user_query: str = ""
     relevance: bool = False
     documents: list = []
@@ -121,18 +118,19 @@ class PoemFlow(Flow[CustomState]):
                              "topic":self.state.topic})
         )
         print("Output generato con successo")
-
+    """
     @listen(generate_output)
     def ragas(self):
-        """Evaluate the generated answer using RAGAS metrics.
+        #Evaluate the generated answer using RAGAS metrics.
 
-        Reads the produced ``report.md`` file and runs the evaluation
-        using the project's configured LLM and embeddings.
-        """
+        #Reads the produced ``report.md`` file and runs the evaluation
+        #using the project's configured LLM and embeddings.
+        
         with open(r"C:\WorkingDirectory\deposito_parodo\24-Settembre\guide_creator_flow\output\report.md", "r", encoding="utf-8") as f:
             read_md = f.read()
             print("Contenuto del file report.md:", read_md[:5])  # Stampa i primi 500 caratteri per verifica
         execute_ragas(self.state.user_query, self.state.documents, read_md)
+    """
 
 
 def kickoff():
@@ -147,5 +145,5 @@ def plot():
     poem_flow.plot()
 
 
-if __name__ == "__main__":    
+if __name__ == "__main__":
     kickoff()

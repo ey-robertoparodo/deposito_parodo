@@ -1,3 +1,9 @@
+"""Utilities to build datasets and run RAGAS evaluation over RAG outputs.
+
+This module provides helpers to synthesize ground-truth answers with an LLM,
+assemble RAGAS-compatible datasets, and execute a suite of RAGAS metrics
+using the project's configured LLM and embeddings.
+"""
 from ragas import evaluate, EvaluationDataset
 from ragas.metrics import (
     context_precision,   # "precision@k" sui chunk recuperati
@@ -10,6 +16,28 @@ from typing import List, Any
 from utilis.models import get_embeddings, get_llm
 
 def get_ground_truth_for_query(query: str, documents: List[Any]) -> str:
+    """Synthesize a reference answer using the LLM and retrieved contexts.
+
+    Parameters
+    ----------
+    query : str
+        The user question for which a reference answer will be generated.
+    documents : List[Any]
+        Retrieved contexts. Each document is expected to expose the key
+        ``"page_content"`` containing text used to guide the generation.
+
+    Returns
+    -------
+    str
+        A reference answer produced by the LLM, conditioned on the provided
+        contexts.
+
+    Examples
+    --------
+    >>> from utilis.ragas_prova import get_ground_truth_for_query
+    >>> docs = [{"page_content": "policy text..."}]
+    >>> ref = get_ground_truth_for_query("What is the policy?", docs)  # doctest: +SKIP
+    """
     llm = get_llm()
 
     joined = "\n---\n".join([document["page_content"] for document in documents])
@@ -31,9 +59,30 @@ def build_ragas_dataset(
     documents: List[Any],
     answer: str
 ):
-    """
-    Esegue la pipeline RAG per ogni domanda e costruisce il dataset per Ragas.
-    Ogni riga contiene: question, contexts, answer, (opzionale) ground_truth.
+    """Build a list of rows compatible with RAGAS `EvaluationDataset`.
+
+    Each row includes the user question, the retrieved contexts, the model's
+    answer to be evaluated, and a synthesized reference answer.
+
+    Parameters
+    ----------
+    query : str
+        The user input or question being evaluated.
+    documents : List[Any]
+        Retrieved contexts. Each must include a ``"page_content"`` key.
+    answer : str
+        The model-generated answer to evaluate against the metrics.
+
+    Returns
+    -------
+    List[dict]
+        A list of dataset rows, suitable for creating a
+        ``ragas.EvaluationDataset``.
+
+    Examples
+    --------
+    >>> from utilis.ragas_prova import build_ragas_dataset
+    >>> rows = build_ragas_dataset("Q?", [{"page_content": "ctx"}], "A")  # doctest: +SKIP
     """
     dataset = []
 
@@ -50,6 +99,34 @@ def build_ragas_dataset(
     return dataset
 
 def execute_ragas(user_query, documents, file_md):
+    """Run RAGAS metrics and persist results to ``ragas_results.csv``.
+
+    Parameters
+    ----------
+    user_query : str
+        The user question that the answer attempts to address.
+    documents : List[Any]
+        Retrieved contexts used to ground the answer. Each must include
+        ``"page_content"``.
+    file_md : str
+        The answer content (e.g., markdown) produced by your RAG pipeline.
+
+    Returns
+    -------
+    None
+        Results are printed to stdout and written to ``ragas_results.csv``.
+
+    Notes
+    -----
+    The metrics computed include context precision/recall, faithfulness,
+    answer relevancy, and answer correctness (when reference answers are
+    available for all rows).
+
+    Examples
+    --------
+    >>> from utilis.ragas_prova import execute_ragas
+    >>> execute_ragas("Q?", [{"page_content": "ctx"}], "A")  # doctest: +SKIP
+    """
     print("Eseguo RAGAS...")
     dataset = build_ragas_dataset(
         query=user_query,
